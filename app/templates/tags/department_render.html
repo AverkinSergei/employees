@@ -1,0 +1,15 @@
+{% load departments_tags %}
+
+<li><i class="fas fa-angle-right rotate"></i>
+  <span><i class="far fa-folder-open ic-w mx-1"></i>{{ obj.name }}</span>
+  <ul class="nested">
+    {% for employee in obj.staff.all %}
+    <li><i class="far fa-address-book ic-w mr-1"></i>{{ employee.fio }}</li>
+    {% endfor %}
+    {% if obj.children %}
+    {% for child in obj.children.all %}
+      {% departments_render_department child %}
+    {% endfor %}
+    {% endif %}
+  </ul>
+</li>

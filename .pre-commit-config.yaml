@@ -1,0 +1,89 @@
+files: '.*\.(py|pyi|toml|txt|yml|yaml)$'
+exclude: '(migrations/|postgres_data/|app/setting\.py|/app/__init__\.py)'
+repos:
+  # pre-commit
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-ast
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+  # pygrep
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.9.0
+    hooks:
+      - id: python-check-blanket-noqa
+      - id: python-no-eval
+      - id: python-no-log-warn
+      - id: python-use-type-annotations
+  # pyupgrade
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.38.0
+    hooks:
+      - id: pyupgrade
+        args: [
+          --py37-plus,
+          --keep-runtime-typing,
+        ]
+  # django-upgrade
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.10.0
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, "4.0"]
+  # autoflake
+  - repo: https://github.com/myint/autoflake
+    rev: v1.5.3
+    hooks:
+      - id: autoflake
+        args: [
+          '--in-place',
+          '--remove-all-unused-imports',
+          '--expand-star-imports',
+          '--ignore-init-module-imports',
+        ]
+  # isort
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+      - id: isort
+        additional_dependencies: [toml]
+  # black
+  - repo: https://github.com/psf/black
+    rev: 22.8.0
+    hooks:
+      - id: black
+        args: [--config=./pyproject.toml]
+  # flake8
+  - repo: https://github.com/pycqa/flake8
+    rev: 5.0.4
+    hooks:
+      - id: flake8
+        additional_dependencies:
+          - flake8-builtins
+          - flake8-comprehensions
+          - flake8-eradicate
+          - flake8-expression-complexity
+          - flake8-simplify
+          - flake8-bugbear
+          - flake8-pie
+          - flake8-print
+          - flake8-use-pathlib
+          - flake8-noqa
+  # mypy
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.971
+    hooks:
+      - id: mypy
+        language: python
+        files: '.*\.py[i]?'
+        verbose: false
+        args: [
+          --install-types,
+          --non-interactive,
+          --no-warn-no-return,
+          --ignore-missing-imports,
+        ]

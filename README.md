@@ -1,29 +1,23 @@
-# README #
+# EMPLOYEES #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Employees representation as a tree of departments with staff.
 
-### What is this repository for? ###
+# Requirements
+Docker v20.10.19+, docker-compose-plugin v2.12.0+
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+# To start project with docker
+cp env.local.example env.local
 
-### How do I get set up? ###
+docker-compose up --build
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+go to http://0.0.0.0/
 
-### Contribution guidelines ###
+# Admin panel
 
-* Writing tests
-* Code review
-* Other guidelines
+http://0.0.0.0/admin/
 
-### Who do I talk to? ###
+Credentials:
 
-* Repo owner or admin
-* Other community or team contact
+login: admin
+
+password: admin
